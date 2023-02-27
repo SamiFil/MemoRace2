@@ -26,7 +26,7 @@ public class Speelveld {
         Card[] kaarten = {boston, boston, nets, nets, bulls, bulls, cavs, cavs, warriors, warriors, rockets, rockets, lakers, lakers, heat, heat};
 
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 16; i++) {
             cardArrayList.add(kaarten[i]);
         }
         Collections.shuffle(cardArrayList);
