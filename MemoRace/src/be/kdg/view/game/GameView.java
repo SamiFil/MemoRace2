@@ -2,6 +2,7 @@ package be.kdg.view.game;
 
 import be.kdg.model.board.Spel;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,17 +37,16 @@ this.model = model;
         this.achtergrond = new Image("/Background.jpg");
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
+
     }
 
     private void layoutNodes() {
-        grid.setHgap(40.0);
-        grid.setVgap(20.0);
-        grid.setPadding(new Insets(50));
         grid.setMaxWidth(Double.MAX_VALUE);
         for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
             ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
-            imagevwAchterkant.setFitHeight(220);
-            imagevwAchterkant.setFitWidth(160);
+            imagevwAchterkant.setFitHeight(200);
+            imagevwAchterkant.setFitWidth(200);
+
             kaartMap.put(imagevwAchterkant,a-1);
             grid.add(imagevwAchterkant,kolom,rij);
             kolom=kolom+1;
