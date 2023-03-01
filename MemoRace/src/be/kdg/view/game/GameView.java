@@ -56,6 +56,10 @@ this.model = model;
             }
         }
         getChildren().add(grid);
+        grid.setPrefSize(600,400);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
