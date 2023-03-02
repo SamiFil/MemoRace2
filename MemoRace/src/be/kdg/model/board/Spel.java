@@ -55,6 +55,10 @@ public class Spel {
         }
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     public int getMouseclicks() {
         return mouseclicks;
     }

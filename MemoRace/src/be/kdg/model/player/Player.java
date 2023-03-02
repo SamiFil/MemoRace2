@@ -25,6 +25,14 @@ public class Player {
         isGewonnen = false;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
     public void setBeurt(boolean beurt) {
         isBeurt = beurt;
     }
