@@ -67,17 +67,14 @@ this.model = model;
             hbox.getChildren().add(vbox); // voeg de VBox toe aan de HBox
         }
 
-// zet de HBox rechts van de BorderPane
-        BorderPane.setMargin(hbox, new Insets(10, 10, 10, 10)); // stel de marge van de HBox in op 10 pixels aan alle kanten
-        BorderPane.setAlignment(hbox, Pos.CENTER_RIGHT); // stel de uitlijning van de HBox in op het midden van de rechterkant van de BorderPane
-        borderPane.setRight(hbox); // voeg de HBox toe aan de rechterkant van de BorderPane
 
-        borderPane.getChildren().addAll(grid, hbox);
+
+        borderPane.getChildren().add(grid);
         grid.setPrefSize(600,400);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20));
-        getChildren().add(borderPane);
+        getChildren().addAll(borderPane, hbox);
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
