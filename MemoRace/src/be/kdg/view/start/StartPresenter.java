@@ -32,7 +32,7 @@ public class StartPresenter {
     private int counter = 0;
     private Speelveld speelVeld;
     ComboBox<String> avatarComboBox;
-    List<String> avatarNames = Arrays.asList("Michael Jordan", "Kobe Bryant", "Stephen Curry", "Lebron James");
+    List<String> avatarNames = Arrays.asList("Michael", "Kobe", "Stephen", "Lebron");
 
     public StartPresenter(StartView startView) throws IOException {
         this.startView = startView;
