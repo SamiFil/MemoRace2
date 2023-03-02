@@ -20,14 +20,12 @@ public class Spel {
     private int mouseclicks=0;
     private ArrayList<Player> players;
     private StartPresenter startPresenter;
-    private Player[] aantalSpelers;
 
-    public Spel(int aantalSpelers) {
+    public Spel() {
         this.spelBezig = true;
         this.speelveld = new Speelveld();
         this.geradenKaarten = new ArrayList<>();
         this.players = new ArrayList<>();
-        this.aantalSpelers = new Player[aantalSpelers];
     }
 
     public boolean paarGevonden() {

@@ -26,7 +26,7 @@ import java.util.List;
  * 16/02/2023
  */
 public class StartPresenter {
-    private StartView startView;
+    private StartView startView = new StartView();
     private Player player;
     Spel spel;
     private int counter = 0;
@@ -37,7 +37,7 @@ public class StartPresenter {
     public StartPresenter(StartView startView) throws IOException {
         this.startView = startView;
         assert false;
-        this.spel = new Spel(spel.getPlayers().size());
+        this.spel = new Spel();
 
         addEventHandlers();
     }
@@ -70,7 +70,7 @@ public class StartPresenter {
         startView.getStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Spel model = new Spel(spel.getPlayers().size());
+                Spel model = new Spel();
                 GameView gameView = new GameView(model);
                 GamePresenter gamePresenter = new GamePresenter(model, gameView);
 //                startView.getScene().setRoot(gameView);
