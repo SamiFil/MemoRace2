@@ -23,8 +23,9 @@ public class Player {
     public Player(String naam, String avatar) {
         this.naam = naam;
         this.avatar = avatar;
-        avatarFoto = new ImageView(new Image(Objects.requireNonNull(getClass().getClassLoader().getResource("avatars/" + avatar)).toExternalForm()));
-        isBeurt = false;
+        avatarFoto = new ImageView(new Image(getClass().getClassLoader().getResource("avatars/" + avatar).toExternalForm()));
+
+                isBeurt = false;
         isGewonnen = false;
     }
 

@@ -39,6 +39,7 @@ public class StartPresenter {
         assert false;
         this.spel = new Spel();
 
+
         addEventHandlers();
     }
 
