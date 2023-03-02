@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Sami Filjak
@@ -26,34 +28,38 @@ public class StartPresenter {
     private StartView startView;
     private int counter = 0;
     private Speelveld speelVeld;
+    ComboBox<String> avatarComboBox;
+    List<String> avatarNames = Arrays.asList("Michael Jordan", "Kobe Bryant", "Stephen Curry", "Lebron James");
 
     public StartPresenter(StartView startView) throws IOException {
-
         this.startView = startView;
+
         addEventHandlers();
     }
 
     private void addEventHandlers() {
-        assert false;
-        ComboBox<Card> comboBox = new ComboBox<>(FXCollections.observableList(speelVeld.getKaarten()));
-        comboBox.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends Card> observable, Card oldValue, Card newValue) -> {
-                });
+
+
         startView.getAddPlayers().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 HBox hBox = new HBox();
                 TextField textField = new TextField();
-
+                avatarComboBox = new ComboBox<>(FXCollections.observableList(avatarNames));
+                avatarComboBox.getSelectionModel().selectedItemProperty().addListener(
+                        (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+                            // Handle the selection change
+                        });
                 textField.setMaxWidth(150);
                 textField.setPromptText("Player " + (++counter));
                 textField.setOnAction(event -> {
                     String playerName = textField.getText();
-                    Card selectedAvatar = comboBox.getSelectionModel().getSelectedItem();
+                    String selectedAvatar = avatarComboBox.getSelectionModel().getSelectedItem();
                     Player player = new Player(playerName, selectedAvatar);
                     startView.playerNames.add(player);
                 });
-                startView.getChildren().add(textField);
+                hBox.getChildren().addAll(textField, avatarComboBox);
+                startView.getChildren().add(hBox);
             }
 
         });
