@@ -1,5 +1,10 @@
 package be.kdg.model.board;
 
+import be.kdg.model.player.Player;
+import be.kdg.view.game.GamePresenter;
+import be.kdg.view.game.GameView;
+import be.kdg.view.start.StartPresenter;
+
 import java.util.ArrayList;
 
 /**
@@ -13,12 +18,14 @@ public class Spel {
     private Speelveld speelveld;
     private ArrayList<Integer> geradenKaarten;
     private int mouseclicks=0;
-    private String spelerNaam;
+    private ArrayList<Player> players;
+    private StartPresenter startPresenter;
 
     public Spel() {
         this.spelBezig = true;
         this.speelveld = new Speelveld();
         this.geradenKaarten = new ArrayList<>();
+        this.players = new ArrayList<>();
     }
 
     public boolean paarGevonden() {
@@ -39,12 +46,13 @@ public class Spel {
         return spelBezig;
     }
 
-    public String getSpelerNaam() {
-        return spelerNaam;
-    }
-
-    public void setSpelerNaam(String spelerNaam) {
-        this.spelerNaam = spelerNaam;
+    public void addPlayer(String playerName, String selectedAvatar) {
+        if (players.size() < 4) {
+            int playerNumber = players.size() + 1;
+            String playerNaam = playerName + playerNumber;
+            Player player = new Player(playerName,selectedAvatar);
+            players.add(player);
+        }
     }
 
     public int getMouseclicks() {

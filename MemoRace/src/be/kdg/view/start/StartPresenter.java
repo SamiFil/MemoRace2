@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class StartPresenter {
     private StartView startView;
+    private Player player;
+    Spel spel;
     private int counter = 0;
     private Speelveld speelVeld;
     ComboBox<String> avatarComboBox;
@@ -55,8 +57,7 @@ public class StartPresenter {
                 textField.setOnAction(event -> {
                     String playerName = textField.getText();
                     String selectedAvatar = avatarComboBox.getSelectionModel().getSelectedItem();
-                    Player player = new Player(playerName, selectedAvatar);
-                    startView.playerNames.add(player);
+                    spel.addPlayer(playerName, selectedAvatar);
                 });
                 hBox.getChildren().addAll(textField, avatarComboBox);
                 startView.getChildren().add(hBox);

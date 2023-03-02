@@ -1,6 +1,8 @@
 package be.kdg.model.player;
 
 import be.kdg.model.board.Card;
+import be.kdg.model.board.Speelveld;
+import be.kdg.view.start.StartPresenter;
 import javafx.scene.image.Image;
 
 /**
@@ -34,4 +36,6 @@ public class Player {
     public Image getAvatarFoto() {
         return avatarFoto;
     }
-}
+
+
+    }
