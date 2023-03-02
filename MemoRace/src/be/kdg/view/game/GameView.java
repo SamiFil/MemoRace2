@@ -58,7 +58,7 @@ this.model = model;
         }
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
         for (Player player : model.getPlayers()) { // itereren over alle spelers
-            ImageView avatar = player.getAvatarFoto(); // maak een ImageView voor de avatar van de speler
+            ImageView avatar = new ImageView("avatars/" + player.getAvatar()); // maak een ImageView voor de avatar van de speler
             avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
             avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
             Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler

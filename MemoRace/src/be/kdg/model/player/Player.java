@@ -15,7 +15,6 @@ import java.util.Objects;
 public class Player {
     private String naam;
     private String avatar;
-    private ImageView avatarFoto;
     private int amountOfWonCards;
     private boolean isBeurt;
     private boolean isGewonnen;
@@ -23,9 +22,7 @@ public class Player {
     public Player(String naam, String avatar) {
         this.naam = naam;
         this.avatar = avatar;
-        avatarFoto = new ImageView(new Image(getClass().getClassLoader().getResource("avatars/" + avatar).toExternalForm()));
-
-                isBeurt = false;
+        isBeurt = false;
         isGewonnen = false;
     }
 
@@ -45,9 +42,6 @@ public class Player {
         isGewonnen = gewonnen;
     }
 
-    public ImageView getAvatarFoto() {
-        return avatarFoto;
-    }
 
 
     }
