@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class StartPresenter {
 
     public StartPresenter(StartView startView) throws IOException {
         this.startView = startView;
+        this.spel = new Spel();
 
         addEventHandlers();
     }
