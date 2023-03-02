@@ -31,8 +31,8 @@ public class Card {
         return isGevonden;
     }
 
-    public boolean isOmgedraaid() {
-        return isOmgedraaid;
+    public void setIsOmgedraaid(Boolean omgedraaid) {
+        isOmgedraaid = omgedraaid;
     }
 
     public Image getVoorkantKaart() {

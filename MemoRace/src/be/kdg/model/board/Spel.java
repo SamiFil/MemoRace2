@@ -33,7 +33,7 @@ public class Spel {
         }
     }
     public boolean checkOfSpelBezig(){
-        if (geradenKaarten.size() == 20) {
+        if (geradenKaarten.size() == 16) {
             spelBezig = false;
         }
         return spelBezig;

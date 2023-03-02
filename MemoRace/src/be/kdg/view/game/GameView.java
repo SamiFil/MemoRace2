@@ -15,6 +15,7 @@ import java.util.HashMap;
  * 10/02/2023
  */
 public class GameView extends BorderPane {
+    private BorderPane borderPane;
     private GridPane grid;
     private Spel model;
     private HBox hBox;
@@ -37,10 +38,11 @@ this.model = model;
         this.achtergrond = new Image("/Background.jpg");
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
+        borderPane = new BorderPane();
 
     }
 
-    private void layoutNodes() {
+    public void layoutNodes() {
         grid.setMaxWidth(Double.MAX_VALUE);
         for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
             ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
@@ -55,11 +57,12 @@ this.model = model;
                 kolom = 0;
             }
         }
-        getChildren().add(grid);
+        borderPane.getChildren().add(grid);
         grid.setPrefSize(600,400);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20));
+        getChildren().add(borderPane);
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
