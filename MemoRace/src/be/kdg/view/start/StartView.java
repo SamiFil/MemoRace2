@@ -1,5 +1,6 @@
 package be.kdg.view.start;
 
+import be.kdg.model.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ public class StartView extends VBox {
     private Label naam;
     private Button start;
     private HBox hBox;
-    public List<String> playerNames;
+    public List<Player> playerNames;
 
     public StartView() {
         this.initialiseNodes();
@@ -28,7 +29,7 @@ public class StartView extends VBox {
 
     }
 
-    public List<String> getPlayerNames() {
+    public List<Player> getPlayerNames() {
         return playerNames;
     }
 
@@ -37,7 +38,7 @@ public class StartView extends VBox {
         naam = new Label("Voer namen in: ");
         start = new Button("Start");
         hBox = new HBox();
-        playerNames = new ArrayList<>();
+        playerNames = new ArrayList<Player>();
 
     }
     private void layoutNodes() {

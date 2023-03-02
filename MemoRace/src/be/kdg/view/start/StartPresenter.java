@@ -1,15 +1,22 @@
 package be.kdg.view.start;
 
+import be.kdg.model.board.Card;
+import be.kdg.model.board.Speelveld;
 import be.kdg.model.board.Spel;
+import be.kdg.model.player.Player;
 import be.kdg.view.game.GamePresenter;
 import be.kdg.view.game.GameView;
-import be.kdg.view.settings.SettingsPresenter;
-import be.kdg.view.settings.SettingsView;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Sami Filjak
@@ -18,22 +25,33 @@ import javafx.stage.Stage;
 public class StartPresenter {
     private StartView startView;
     private int counter = 0;
+    private Speelveld speelVeld;
 
-    public StartPresenter(StartView startView) {
+    public StartPresenter(StartView startView) throws IOException {
+
         this.startView = startView;
         addEventHandlers();
     }
 
     private void addEventHandlers() {
+        assert false;
+        ComboBox<Card> comboBox = new ComboBox<>(FXCollections.observableList(speelVeld.getKaarten()));
+        comboBox.getSelectionModel().selectedItemProperty().addListener(
+                (ObservableValue<? extends Card> observable, Card oldValue, Card newValue) -> {
+                });
         startView.getAddPlayers().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                HBox hBox = new HBox();
                 TextField textField = new TextField();
+
                 textField.setMaxWidth(150);
                 textField.setPromptText("Player " + (++counter));
                 textField.setOnAction(event -> {
                     String playerName = textField.getText();
-                    startView.playerNames.add(playerName);
+                    Card selectedAvatar = comboBox.getSelectionModel().getSelectedItem();
+                    Player player = new Player(playerName, selectedAvatar);
+                    startView.playerNames.add(player);
                 });
                 startView.getChildren().add(textField);
             }

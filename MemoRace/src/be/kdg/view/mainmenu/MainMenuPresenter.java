@@ -11,6 +11,8 @@ import be.kdg.view.start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import java.io.IOException;
+
 /**
  * Sami Filjak
  * 30/01/2023
@@ -39,7 +41,11 @@ public class MainMenuPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 StartView startView = new StartView();
-                StartPresenter startPresenter = new StartPresenter(startView);
+                try {
+                    StartPresenter startPresenter = new StartPresenter(startView);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 mainMenuView.getScene().setRoot(startView);
 
             }
