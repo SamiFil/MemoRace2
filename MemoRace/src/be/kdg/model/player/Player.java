@@ -4,6 +4,9 @@ import be.kdg.model.board.Card;
 import be.kdg.model.board.Speelveld;
 import be.kdg.view.start.StartPresenter;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.Objects;
 
 /**
  * Sami Filjak
@@ -12,7 +15,7 @@ import javafx.scene.image.Image;
 public class Player {
     private String naam;
     private String avatar;
-    private Image avatarFoto;
+    private ImageView avatarFoto;
     private int amountOfWonCards;
     private boolean isBeurt;
     private boolean isGewonnen;
@@ -20,7 +23,7 @@ public class Player {
     public Player(String naam, String avatar) {
         this.naam = naam;
         this.avatar = avatar;
-        avatarFoto = new Image("MemoRace/Resources/avatars/" + avatar + ".jpg");
+        avatarFoto = new ImageView(new Image(Objects.requireNonNull(getClass().getClassLoader().getResource("avatars/" + avatar)).toExternalForm()));
         isBeurt = false;
         isGewonnen = false;
     }
@@ -41,7 +44,7 @@ public class Player {
         isGewonnen = gewonnen;
     }
 
-    public Image getAvatarFoto() {
+    public ImageView getAvatarFoto() {
         return avatarFoto;
     }
 
