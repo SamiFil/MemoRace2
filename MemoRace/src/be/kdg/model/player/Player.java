@@ -20,7 +20,7 @@ public class Player {
     public Player(String naam, String avatar) {
         this.naam = naam;
         this.avatar = avatar;
-        avatarFoto = new Image("avatars/" + avatar + ".jpg");
+        avatarFoto = new Image("MemoRace/Resources/avatars/" + avatar + ".jpg");
         isBeurt = false;
         isGewonnen = false;
     }
