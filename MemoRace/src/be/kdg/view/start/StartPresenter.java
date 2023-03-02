@@ -36,7 +36,8 @@ public class StartPresenter {
 
     public StartPresenter(StartView startView) throws IOException {
         this.startView = startView;
-        this.spel = new Spel();
+        assert false;
+        this.spel = new Spel(spel.getPlayers().size());
 
         addEventHandlers();
     }
@@ -69,7 +70,7 @@ public class StartPresenter {
         startView.getStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Spel model = new Spel();
+                Spel model = new Spel(spel.getPlayers().size());
                 GameView gameView = new GameView(model);
                 GamePresenter gamePresenter = new GamePresenter(model, gameView);
 //                startView.getScene().setRoot(gameView);
