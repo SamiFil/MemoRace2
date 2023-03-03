@@ -16,14 +16,13 @@ import java.util.HashMap;
  * 10/02/2023
  */
 public class GameView extends BorderPane {
-    private BorderPane borderPane;
     private GridPane grid;
     private Spel model;
-    private VBox vBox;
     private Image achtergrond;
     private HashMap<ImageView,Integer> kaartMap;
     int rij = 0;
     int kolom = 0;
+    private HBox hbox;
 
     public GameView (Spel model) {
         this.model = model;
@@ -33,11 +32,10 @@ public class GameView extends BorderPane {
 
     public void initialiseNodes() {
         grid = new GridPane();
-        vBox = new VBox();
         this.achtergrond = new Image("/Background.jpg");
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
-        borderPane = new BorderPane();
+        HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
 
     }
 
@@ -56,13 +54,13 @@ public class GameView extends BorderPane {
 //                kolom = 0;
 //            }
 //        }
-        HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
         for (Player player : model.getPlayers()) { // itereren over alle spelers
+
             ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
             avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
             avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
             Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
-            VBox vbox = new VBox(); // maak een VBox voor de avatar en de naam van de speler
+            VBox vbox = new VBox();
             vbox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
             hbox.getChildren().add(vbox); // voeg de VBox toe aan de HBox
         }
@@ -75,6 +73,7 @@ public class GameView extends BorderPane {
 //        BorderPane.setMargin(grid, new Insets(10, 10, 10, 10));
 //        setCenter(grid);
         getChildren().add(hbox);
+        hbox.setAlignment(Pos.CENTER_RIGHT);
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
