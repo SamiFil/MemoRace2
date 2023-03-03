@@ -25,7 +25,7 @@ public class Spel {
         this.spelBezig = true;
         this.speelveld = new Speelveld();
         this.geradenKaarten = new ArrayList<>();
-        this.players = new ArrayList<>();
+        this.players = new ArrayList<Player>();
     }
 
     public boolean paarGevonden() {
