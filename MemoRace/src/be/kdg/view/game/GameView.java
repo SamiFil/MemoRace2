@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Sami Filjak
@@ -26,8 +27,10 @@ public class GameView extends BorderPane {
 
     public GameView (Spel model) {
         this.model = model;
+        updatePlayers(model.getPlayers());
         this.initialiseNodes();
         this.layoutNodes();
+
     }
 
     public void initialiseNodes() {
@@ -38,7 +41,18 @@ public class GameView extends BorderPane {
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
 
     }
-
+    public void updatePlayers(List<Player> players) {
+        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
+        for (Player player : players) { // itereren over alle spelers
+            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
+            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
+            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
+            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
+            HBox playerBox = new HBox();
+            playerBox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
+            hbox.getChildren().add(playerBox); // voeg de VBox toe aan de HBox
+        }
+    }
     public void layoutNodes() {
 //        grid.setMaxWidth(Double.MAX_VALUE);
 //        for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
@@ -54,16 +68,7 @@ public class GameView extends BorderPane {
 //                kolom = 0;
 //            }
 //        }
-        for (Player player : model.getPlayers()) { // itereren over alle spelers
 
-            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
-            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
-            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
-            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
-            VBox vbox = new VBox();
-            vbox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
-            hbox.getChildren().add(vbox); // voeg de VBox toe aan de HBox
-        }
 
 
 //        grid.setHgap(10);
