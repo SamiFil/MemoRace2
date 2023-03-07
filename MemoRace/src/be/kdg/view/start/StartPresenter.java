@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -81,19 +82,37 @@ public class StartPresenter {
         startView.getStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Spel model = new Spel();
-                GameView gameView = new GameView(model);
-                GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                boolean emptyFields = false;
+                for (Node node : startView.getChildren()) {
+                    if (node instanceof HBox) {
+                        HBox hBox = (HBox) node;
+                        TextField textField = (TextField) hBox.getChildren().get(0);
+                        if (textField.getText().isEmpty()) {
+                            emptyFields = true;
+                            break;
+                        }
+                    }
+                }
+                if (emptyFields) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Missing information");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please fill in all player names");
+                    alert.showAndWait();
+                } else {
+                    Spel model = new Spel();
+                    GameView gameView = new GameView(model);
+                    GamePresenter gamePresenter = new GamePresenter(model, gameView);
 //                startView.getScene().setRoot(gameView);
-                Stage gameStage = new Stage();
-                Scene gameScene = new Scene(gameView, 1920, 1080);
-                gameStage.setScene(gameScene);
-                gameStage.setFullScreen(true);
-                gameView.getScene().getWindow().sizeToScene();
-                gameView.getScene().getWindow().centerOnScreen();
-                gameScene.setRoot(gameView);
-                gameStage.show();
-
+                    Stage gameStage = new Stage();
+                    Scene gameScene = new Scene(gameView, 1920, 1080);
+                    gameStage.setScene(gameScene);
+                    gameStage.setFullScreen(true);
+                    gameView.getScene().getWindow().sizeToScene();
+                    gameView.getScene().getWindow().centerOnScreen();
+                    gameScene.setRoot(gameView);
+                    gameStage.show();
+                }
             }
         });
     }
