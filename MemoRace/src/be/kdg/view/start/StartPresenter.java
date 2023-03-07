@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -60,14 +61,23 @@ public class StartPresenter {
                 textField.setPromptText("Player " + (++counter));
                 textField.setOnAction(event -> {
                     String playerName = textField.getText();
-                    String selectedAvatar = avatarComboBox.getSelectionModel().getSelectedItem();
-                    spel.addPlayer(playerName, selectedAvatar);
+                    String selectedAvatar = avatarComboBox.getValue().toString();
+                    if (!playerName.isEmpty()) {
+                        spel.addPlayer(playerName, selectedAvatar);
+                        textField.setEditable(false);
+                    } else {
+                        // Show an error message to the user, informing them to enter a name
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(null);
+                        alert.setContentText("Gelieve een naam in te voeren voor speler " + counter);
+                        alert.showAndWait();
+                    }
                 });
                 hBox.getChildren().addAll(textField, avatarComboBox);
                 startView.getChildren().add(hBox);
             }
-
         });
+
         startView.getStart().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

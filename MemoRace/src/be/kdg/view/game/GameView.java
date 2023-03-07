@@ -27,7 +27,7 @@ public class GameView extends BorderPane {
 
     public GameView (Spel model) {
         this.model = model;
-        updatePlayers(model.getPlayers());
+//        updatePlayers(model.getPlayers());
         this.initialiseNodes();
         this.layoutNodes();
 
@@ -41,44 +41,43 @@ public class GameView extends BorderPane {
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
 
     }
-    public void updatePlayers(List<Player> players) {
-        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
-        for (Player player : players) { // itereren over alle spelers
-            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
-            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
-            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
-            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
-            HBox playerBox = new HBox();
-            playerBox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
-            hbox.getChildren().add(playerBox); // voeg de VBox toe aan de HBox
-        }
-    }
-    public void layoutNodes() {
-//        grid.setMaxWidth(Double.MAX_VALUE);
-//        for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
-//            ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
-//            imagevwAchterkant.setFitHeight(200);
-//            imagevwAchterkant.setFitWidth(200);
-//
-//            kaartMap.put(imagevwAchterkant,a-1);
-//            grid.add(imagevwAchterkant,kolom,rij);
-//            kolom=kolom+1;
-//            if(a%4 == 0 && a<=model.getSpeelveld().getKaarten().size()){
-//                rij = rij+1;
-//                kolom = 0;
-//            }
+//    public void updatePlayers(List<Player> players) {
+//        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
+//        VBox vbox = new VBox();
+//        for (Player player : players) { // itereren over alle spelers
+//            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
+//            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
+//            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
+//            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
+//            vbox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
+//            hbox.getChildren().add(hbox); // voeg de VBox toe aan de HBox
 //        }
+//    }
+    public void layoutNodes() {
+        grid.setMaxWidth(Double.MAX_VALUE);
+        for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
+            ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
+            imagevwAchterkant.setFitHeight(200);
+            imagevwAchterkant.setFitWidth(200);
+
+            kaartMap.put(imagevwAchterkant,a-1);
+            grid.add(imagevwAchterkant,kolom,rij);
+            kolom=kolom+1;
+            if(a%4 == 0 && a<=model.getSpeelveld().getKaarten().size()){
+                rij = rij+1;
+                kolom = 0;
+            }
+        }
 
 
 
-//        grid.setHgap(10);
-//        grid.setVgap(10);
-//        grid.setPadding(new Insets(20));
-//        borderPane.getChildren().add(grid);
-//        BorderPane.setMargin(grid, new Insets(10, 10, 10, 10));
-//        setCenter(grid);
-        getChildren().add(hbox);
-        hbox.setAlignment(Pos.CENTER_RIGHT);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+        getChildren().add(grid);
+        setMargin(grid, new Insets(10, 10, 10, 10));
+//        getChildren().add(hbox);
+//        hbox.setAlignment(Pos.CENTER_RIGHT);
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
