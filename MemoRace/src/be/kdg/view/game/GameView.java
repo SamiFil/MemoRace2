@@ -49,7 +49,7 @@ public class GameView extends BorderPane {
             public void run() {
                 try {
                     for (int i = 0; i < 15; i++) {
-                        File file = new File("dice/" + (random.nextInt(6)+1)+".png");
+                        File file = new File("MemoRace/Resources/dice/" + (random.nextInt(6)+1) +".png");
                         diceImage.setImage(new Image(file.toURI().toString()));
                         Thread.sleep(50);
                     }
@@ -72,6 +72,7 @@ public class GameView extends BorderPane {
         rollButton = new Button("Roll");
         hbox2 = new HBox();
         diceImage = new ImageView();
+        random = new Random();
     }
 //    public void updatePlayers(List<Player> players) {
 //        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
