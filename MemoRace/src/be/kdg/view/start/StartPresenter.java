@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class StartPresenter {
     private StartView startView = new StartView();
+    private TextField textField;
     private Player player;
     Spel spel;
     private int counter = 0;
@@ -52,7 +53,7 @@ public class StartPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 HBox hBox = new HBox();
-                TextField textField = new TextField();
+                textField = new TextField();
                 avatarComboBox = new ComboBox<>(FXCollections.observableList(avatarNames));
                 avatarComboBox.getSelectionModel().selectedItemProperty().addListener(
                         (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -63,16 +64,8 @@ public class StartPresenter {
                 textField.setOnAction(event -> {
                     String playerName = textField.getText();
                     String selectedAvatar = avatarComboBox.getValue().toString();
-                    if (!playerName.isEmpty()) {
                         spel.addPlayer(playerName, selectedAvatar);
                         textField.setEditable(false);
-                    } else {
-                        // Show an error message to the user, informing them to enter a name
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText(null);
-                        alert.setContentText("Gelieve een naam in te voeren voor speler " + counter);
-                        alert.showAndWait();
-                    }
                 });
                 hBox.getChildren().addAll(textField, avatarComboBox);
                 startView.getChildren().add(hBox);
@@ -83,16 +76,10 @@ public class StartPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 boolean emptyFields = false;
-                for (Node node : startView.getChildren()) {
-                    if (node instanceof HBox) {
-                        HBox hBox = (HBox) node;
-                        TextField textField = (TextField) hBox.getChildren().get(0);
                         if (textField.getText().isEmpty()) {
                             emptyFields = true;
-                            break;
                         }
-                    }
-                }
+
                 if (emptyFields) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Missing information");

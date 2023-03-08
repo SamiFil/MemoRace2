@@ -1,16 +1,14 @@
 package be.kdg.view.game;
 
+import be.kdg.model.board.Dice;
 import be.kdg.model.board.Spel;
-import be.kdg.model.player.Player;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Sami Filjak
@@ -20,10 +18,22 @@ public class GameView extends BorderPane {
     private GridPane grid;
     private Spel model;
     private Image achtergrond;
+    private Dice dice;
     private HashMap<ImageView,Integer> kaartMap;
     int rij = 0;
     int kolom = 0;
     private HBox hbox;
+    private Button rollButton;
+    private ImageView diceImage;
+    private HBox hbox2;
+
+    public Button getRollButton() {
+        return rollButton;
+    }
+
+    public ImageView getDiceImage() {
+        return diceImage;
+    }
 
     public GameView (Spel model) {
         this.model = model;
@@ -39,7 +49,9 @@ public class GameView extends BorderPane {
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
-
+        rollButton = new Button("Roll");
+        hbox2 = new HBox();
+        dice = new Dice();
     }
 //    public void updatePlayers(List<Player> players) {
 //        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
@@ -54,6 +66,15 @@ public class GameView extends BorderPane {
 //        }
 //    }
     public void layoutNodes() {
+        dice.setFitHeight(200);
+        dice.setFitWidth(200);
+        dice.setLayoutY(100);
+        dice.setLayoutX(100);
+        dice.isPickOnBounds();
+        dice.isPreserveRatio();
+        rollButton.setMnemonicParsing(false);
+        rollButton.setPrefSize(100,30);
+        hbox2.getChildren().addAll(dice, rollButton);
         grid.setMaxWidth(Double.MAX_VALUE);
         for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
             ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
