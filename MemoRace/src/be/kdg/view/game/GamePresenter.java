@@ -1,10 +1,16 @@
 package be.kdg.view.game;
 
 import be.kdg.model.board.Spel;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * Sami Filjak
@@ -22,6 +28,12 @@ public class GamePresenter {
     }
 
     public void addEventHandlers() {
+        gameView.getRollButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+              gameView.roll(actionEvent);
+            }
+        });
         gameView.getGrid().getChildren().forEach(item -> {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override

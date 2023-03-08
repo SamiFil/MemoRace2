@@ -2,13 +2,16 @@ package be.kdg.view.game;
 
 import be.kdg.model.board.Dice;
 import be.kdg.model.board.Spel;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Sami Filjak
@@ -24,8 +27,7 @@ public class GameView extends BorderPane {
     private HBox hbox;
     private Button rollButton;
     private ImageView diceImage;
-    private HBox hbox2;
-    private Dice dice;
+    private HBox hbox2;private Random random;
     public Button getRollButton() {
         return rollButton;
     }
@@ -41,9 +43,24 @@ public class GameView extends BorderPane {
         this.layoutNodes();
 
     }
-    private void initDice() {
-        dice = new Dice();
-        getChildren().add(dice);
+    public void roll(ActionEvent actionEvent) {
+        rollButton.setDisable(true);
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+                    for (int i = 0; i < 15; i++) {
+                        File file = new File("dice/" + (random.nextInt(6)+1)+".png");
+                        diceImage.setImage(new Image(file.toURI().toString()));
+                        Thread.sleep(50);
+                    }
+                    rollButton.setDisable(false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        thread.start();
     }
 
     public void initialiseNodes() {
@@ -90,16 +107,15 @@ public class GameView extends BorderPane {
         grid.setVgap(10);
         grid.setPadding(new Insets(20));
         setMargin(grid, new Insets(10, 10, 10, 10));
-        initDice();
-        dice.setFitHeight(200);
-        dice.setFitWidth(200);
-        dice.setLayoutY(100);
-        dice.setLayoutX(100);
-        dice.isPickOnBounds();
-        dice.isPreserveRatio();
+        diceImage.setFitHeight(200);
+        diceImage.setFitWidth(200);
+        diceImage.setLayoutY(100);
+        diceImage.setLayoutX(100);
+        diceImage.isPickOnBounds();
+        diceImage.isPreserveRatio();
         rollButton.setMnemonicParsing(false);
         rollButton.setPrefSize(100,30);
-        hbox2.getChildren().addAll(dice, rollButton);
+        hbox2.getChildren().addAll(diceImage, rollButton);
         getChildren().add(hbox2);
 //        getChildren().add(hbox);
 //        hbox.setAlignment(Pos.CENTER_RIGHT);
