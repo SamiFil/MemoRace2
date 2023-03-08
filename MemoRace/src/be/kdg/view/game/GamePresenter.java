@@ -34,7 +34,7 @@ public class GamePresenter {
               gameView.roll(actionEvent);
             }
         });
-        gameView.getGrid().getChildren().forEach(item -> {
+        gameView.getChildren().forEach(item -> {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -49,26 +49,26 @@ public class GamePresenter {
                             } else {
                                 model.setKeuze2(gameView.getKaartMap().get(currentImage) + 1);
                                 if (!model.paarGevonden()) {
-                                    gameView.getGrid().setDisable(true);
+                                    gameView.setDisable(true);
                                     disableKeys = true;
                                     long startTime = System.currentTimeMillis();
                                     long elapsedTime;
                                     do {
                                         elapsedTime = System.currentTimeMillis() - startTime;
                                     } while (elapsedTime < 1000);
-                                    ImageView eersteKeuzeImage = (ImageView) gameView.getGrid().getChildren().get(model.getKeuze1() - 1);
+                                    ImageView eersteKeuzeImage = (ImageView) gameView.getChildren().get(model.getKeuze1() - 1);
                                     eersteKeuzeImage.setImage(model.getSpeelveld().getKaarten().get(model.getKeuze1() - 1).getAchterkantKaart());
                                     model.getSpeelveld().getKaarten().get(model.getKeuze1() - 1).setIsOmgedraaid(false);
                                     eersteKeuzeImage.setMouseTransparent(false);
                                     currentImage.setImage(model.getSpeelveld().getKaarten().get(gameView.getKaartMap().get(currentImage)).getAchterkantKaart());
                                     model.getSpeelveld().getKaarten().get(gameView.getKaartMap().get(currentImage)).setIsOmgedraaid(false);
                                     currentImage.setMouseTransparent(false);
-                                    gameView.getGrid().setDisable(false);
+                                    gameView.setDisable(false);
                                     disableKeys = false;
                                 } else {
-                                    gameView.getGrid().setDisable(true);
+                                    gameView.setDisable(true);
                                     disableKeys = true;
-                                    gameView.getGrid().setDisable(false);
+                                    gameView.setDisable(false);
                                     disableKeys = false;
                                 }
                                 model.setKeuze2(0);

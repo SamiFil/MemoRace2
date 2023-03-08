@@ -2,23 +2,26 @@ package be.kdg.view.game;
 
 import be.kdg.model.board.Dice;
 import be.kdg.model.board.Spel;
+import be.kdg.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Sami Filjak
  * 10/02/2023
  */
-public class GameView extends BorderPane {
-    private GridPane grid;
+public class GameView extends GridPane {
     private Spel model;
     private Image achtergrond;
     private HashMap<ImageView,Integer> kaartMap;
@@ -27,7 +30,7 @@ public class GameView extends BorderPane {
     private HBox hbox;
     private Button rollButton;
     private ImageView diceImage;
-    private HBox hbox2;private Random random;
+    private Random random;
     public Button getRollButton() {
         return rollButton;
     }
@@ -38,7 +41,7 @@ public class GameView extends BorderPane {
 
     public GameView (Spel model) {
         this.model = model;
-//        updatePlayers(model.getPlayers());
+    updatePlayers(model.getPlayers());
         this.initialiseNodes();
         this.layoutNodes();
 
@@ -64,50 +67,43 @@ public class GameView extends BorderPane {
     }
 
     public void initialiseNodes() {
-        grid = new GridPane();
         this.achtergrond = new Image("/Background.jpg", true);
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
         rollButton = new Button("Roll");
-        hbox2 = new HBox();
         diceImage = new ImageView();
         random = new Random();
     }
-//    public void updatePlayers(List<Player> players) {
-//        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
-//        VBox vbox = new VBox();
-//        for (Player player : players) { // itereren over alle spelers
-//            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
-//            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
-//            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
-//            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
-//            vbox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
-//            hbox.getChildren().add(hbox); // voeg de VBox toe aan de HBox
-//        }
-//    }
+    public void updatePlayers(List<Player> players) {
+        VBox vbox = new VBox();
+        for (Player player : players) { // itereren over alle spelers
+            ImageView avatar = new ImageView("avatars/" + player.getAvatar() + ".jpg"); // maak een ImageView voor de avatar van de speler
+            avatar.setFitHeight(50); // stel de hoogte van de ImageView in op 50 pixels
+            avatar.setFitWidth(50); // stel de breedte van de ImageView in op 50 pixels
+            Label naam = new Label(player.getNaam()); // maak een Label voor de naam van de speler
+            vbox.getChildren().addAll(avatar, naam); // voeg de avatar en naam toe aan de VBox
+            hbox.getChildren().add(hbox); // voeg de VBox toe aan de HBox
+        }
+    }
     public void layoutNodes() {
-        grid.setMaxWidth(Double.MAX_VALUE);
+        setMaxWidth(Double.MAX_VALUE);
         for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
             ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
             imagevwAchterkant.setFitHeight(200);
             imagevwAchterkant.setFitWidth(200);
 
             kaartMap.put(imagevwAchterkant,a-1);
-            grid.add(imagevwAchterkant,kolom,rij);
+            add(imagevwAchterkant,kolom,rij);
             kolom=kolom+1;
             if(a%4 == 0 && a<=model.getSpeelveld().getKaarten().size()){
                 rij = rij+1;
                 kolom = 0;
             }
         }
-
-
-
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20));
-        setMargin(grid, new Insets(10, 10, 10, 10));
+        setHgap(10);
+        setVgap(10);
+        setPadding(new Insets(20));
         diceImage.setFitHeight(200);
         diceImage.setFitWidth(200);
         diceImage.setLayoutY(100);
@@ -115,20 +111,15 @@ public class GameView extends BorderPane {
         diceImage.isPickOnBounds();
         diceImage.isPreserveRatio();
         rollButton.setMnemonicParsing(false);
-        rollButton.setPrefSize(100,30);
-        GridPane.setConstraints(diceImage,2,2);
-        grid.getChildren().add(diceImage);
-        GridPane.setConstraints(rollButton, 3, 2);
-        grid.getChildren().add(rollButton);
-        getChildren().add(grid);
-//        getChildren().add(hbox);
-//        hbox.setAlignment(Pos.CENTER_RIGHT);
+        rollButton.setPrefSize(50,30);
+        GridPane.setConstraints(diceImage,11,2);
+        getChildren().add(diceImage);
+        GridPane.setConstraints(rollButton, 12, 2);
+        getChildren().add(rollButton);
+        GridPane.setConstraints(hbox, 6,0);
+        getChildren().add(hbox);
     }
     public HashMap<ImageView,Integer> getKaartMap() {
         return kaartMap;
-    }
-
-    public GridPane getGrid() {
-        return grid;
     }
 }
