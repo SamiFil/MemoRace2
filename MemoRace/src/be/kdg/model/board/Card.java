@@ -17,7 +17,7 @@ public class Card {
     public Card(String typeCard, String imageURL) {
         this.typeCard = typeCard;
         this.imageURL = imageURL;
-        achterkantKaart = new Image("cards/back.png");
+        achterkantKaart = new Image("cards/back.png", true);
         voorkantKaart = new Image(imageURL);
         isOmgedraaid = false;
         isGevonden = false;

@@ -18,7 +18,6 @@ public class GameView extends BorderPane {
     private GridPane grid;
     private Spel model;
     private Image achtergrond;
-    private Dice dice;
     private HashMap<ImageView,Integer> kaartMap;
     int rij = 0;
     int kolom = 0;
@@ -26,7 +25,7 @@ public class GameView extends BorderPane {
     private Button rollButton;
     private ImageView diceImage;
     private HBox hbox2;
-
+    private Dice dice;
     public Button getRollButton() {
         return rollButton;
     }
@@ -42,16 +41,20 @@ public class GameView extends BorderPane {
         this.layoutNodes();
 
     }
+    private void initDice() {
+        dice = new Dice();
+        getChildren().add(dice);
+    }
 
     public void initialiseNodes() {
         grid = new GridPane();
-        this.achtergrond = new Image("/Background.jpg");
+        this.achtergrond = new Image("/Background.jpg", true);
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
         HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
         rollButton = new Button("Roll");
         hbox2 = new HBox();
-        dice = new Dice();
+        diceImage = new ImageView();
     }
 //    public void updatePlayers(List<Player> players) {
 //        hbox.getChildren().clear(); // verwijder alle bestaande nodes uit de hbox
@@ -97,6 +100,7 @@ public class GameView extends BorderPane {
         grid.setPadding(new Insets(20));
         getChildren().add(grid);
         setMargin(grid, new Insets(10, 10, 10, 10));
+        initDice();
 //        getChildren().add(hbox);
 //        hbox.setAlignment(Pos.CENTER_RIGHT);
     }

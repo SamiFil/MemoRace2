@@ -87,6 +87,7 @@ public class StartPresenter {
                     alert.setContentText("Please fill in all player names");
                     alert.showAndWait();
                 } else {
+
                     Spel model = new Spel();
                     GameView gameView = new GameView(model);
                     GamePresenter gamePresenter = new GamePresenter(model, gameView);
