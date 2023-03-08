@@ -69,15 +69,6 @@ public class GameView extends BorderPane {
 //        }
 //    }
     public void layoutNodes() {
-        dice.setFitHeight(200);
-        dice.setFitWidth(200);
-        dice.setLayoutY(100);
-        dice.setLayoutX(100);
-        dice.isPickOnBounds();
-        dice.isPreserveRatio();
-        rollButton.setMnemonicParsing(false);
-        rollButton.setPrefSize(100,30);
-        hbox2.getChildren().addAll(dice, rollButton);
         grid.setMaxWidth(Double.MAX_VALUE);
         for (int a=1;a<=model.getSpeelveld().getKaarten().size();a++) {
             ImageView imagevwAchterkant = new ImageView(model.getSpeelveld().getKaarten().get(a-1).getAchterkantKaart());
@@ -98,9 +89,18 @@ public class GameView extends BorderPane {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20));
-        getChildren().add(grid);
         setMargin(grid, new Insets(10, 10, 10, 10));
         initDice();
+        dice.setFitHeight(200);
+        dice.setFitWidth(200);
+        dice.setLayoutY(100);
+        dice.setLayoutX(100);
+        dice.isPickOnBounds();
+        dice.isPreserveRatio();
+        rollButton.setMnemonicParsing(false);
+        rollButton.setPrefSize(100,30);
+        hbox2.getChildren().addAll(dice, rollButton);
+        getChildren().add(hbox2);
 //        getChildren().add(hbox);
 //        hbox.setAlignment(Pos.CENTER_RIGHT);
     }
