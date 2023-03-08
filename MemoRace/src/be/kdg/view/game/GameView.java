@@ -115,8 +115,11 @@ public class GameView extends BorderPane {
         diceImage.isPreserveRatio();
         rollButton.setMnemonicParsing(false);
         rollButton.setPrefSize(100,30);
-        hbox2.getChildren().addAll(diceImage, rollButton);
-        getChildren().add(hbox2);
+        GridPane.setConstraints(diceImage,2,2);
+        grid.getChildren().add(diceImage);
+        GridPane.setConstraints(rollButton, 3, 2);
+        grid.getChildren().add(rollButton);
+        getChildren().add(grid);
 //        getChildren().add(hbox);
 //        hbox.setAlignment(Pos.CENTER_RIGHT);
     }
