@@ -35,8 +35,7 @@ public class StartPresenter {
     private StartView startView = new StartView();
     private TextField textField;
     private Player player;
-    private ArrayList<Player> players;
-    Spel model;
+    Spel model = new Spel();
     private int counter = 0;
     private Speelveld speelVeld;
     ComboBox<String> avatarComboBox;
@@ -47,17 +46,12 @@ public class StartPresenter {
     public StartPresenter(StartView startView) {
         this.startView = startView;
         addEventHandlers();
-
     }
 
 
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
 
     private void addEventHandlers() {
-        players = new ArrayList<Player>();
         startView.getAddPlayers().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -104,7 +98,7 @@ public class StartPresenter {
                     textField.setOnAction(event -> {
                         String playerName = textField.getText();
                         ImageView selectedAvatar = new ImageView("avatars/" + avatarComboBox.getValue().toString() + ".jpg");
-                        players.add(new Player(playerName, selectedAvatar));
+                        model.getPlayers().add(new Player(playerName, selectedAvatar));
                         textField.setEditable(false);
                     });
 
@@ -116,7 +110,7 @@ public class StartPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 boolean emptyFields = false;
-                for (Player player : players) {
+                for (Player player : model.getPlayers()) {
                     if (player.getNaam().isEmpty()) {
                         emptyFields = true;
                         break;
@@ -129,7 +123,7 @@ public class StartPresenter {
                     alert.setContentText("Gelieve alle speler-info in te vullen.");
                     alert.showAndWait();
                 } else {
-                    if (players.size() < 2) {
+                    if (model.getPlayers().size() < 2) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Missing information");
                         alert.setHeaderText(null);
@@ -138,7 +132,6 @@ public class StartPresenter {
                         return;
                     }
                     else {
-                        Spel model = new Spel();
                         GameView gameView = new GameView(model);
                         GamePresenter gamePresenter = new GamePresenter(model, gameView);
                         Stage gameStage = new Stage();

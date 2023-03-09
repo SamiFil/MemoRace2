@@ -14,29 +14,9 @@ import java.util.Random;
  * 8/03/2023
  */
 public class Dice extends ImageView {
-    Random random = new Random();
     Spel model;
     StartPresenter startPresenter;
-    GameView gameview = new GameView(model);
 
-public void roll(ActionEvent actionEvent) {
-gameview.getRollButton().setDisable(true);
-Thread thread = new Thread() {
-    public void run() {
-        try {
-            for (int i = 0; i < 15; i++) {
-                File file = new File("dice/" + (random.nextInt(6)+1)+".jpg");
-                gameview.getDiceImage().setImage(new Image(file.toURI().toString()));
-                Thread.sleep(50);
-            }
-            gameview.getRollButton().setDisable(false);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-};
 
-    thread.start();
-}
 
 }

@@ -12,18 +12,19 @@ import java.util.ArrayList;
  * 16/02/2023
  */
 public class Spel {
+    private ArrayList<Player> players;
     private int keuze1=0;
     private int keuze2=0;
     private boolean spelBezig;
     private Speelveld speelveld;
     private ArrayList<Integer> geradenKaarten;
     private int mouseclicks=0;
-    private StartPresenter startPresenter;
 
     public Spel() {
         this.spelBezig = true;
         this.speelveld = new Speelveld();
         this.geradenKaarten = new ArrayList<>();
+        this.players = new ArrayList<Player>();
     }
 
     public boolean paarGevonden() {
@@ -64,6 +65,14 @@ public class Spel {
     }
     public int getKeuze1() {
         return keuze1;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public int getKeuze2() {
+        return keuze2;
     }
 
     public Speelveld getSpeelveld() {

@@ -29,7 +29,7 @@ import java.util.Random;
  * 10/02/2023
  */
 public class GameView extends GridPane {
-    private Spel model;
+    private Spel model = new Spel();
     private Image achtergrond;
     private HashMap<ImageView, Integer> kaartMap;
     int rij = 0;
@@ -57,12 +57,12 @@ public class GameView extends GridPane {
     public GameView(Spel model) {
         this.initialiseNodes();
         this.layoutNodes();
-        updateScoreboard(startPresenter.getPlayers());
+        this.model = model;
+        updateScoreboard(model.getPlayers());
 
     }
 
     public void updateScoreboard(ArrayList<Player> players) {
-        // update scoreboard with player info
         for (int i = 0; i < players.size(); i++) {
             nameLabel[i].setText(players.get(i).getNaam());
             scoreLabel[i].setText(Integer.toString(players.get(i).getScore()));
@@ -81,7 +81,7 @@ public class GameView extends GridPane {
             public void run() {
                 try {
                     for (int i = 0; i < 15; i++) {
-                        File file = new File("MemoRace/Resources/dice/" + (random.nextInt(6) + 1) + ".png");
+                        File file = new File("MemoRace/Resources/dice/" + (random.nextInt(6) + 1) + ".jpg");
                         diceImage.setImage(new Image(file.toURI().toString()));
                         Thread.sleep(50);
                     }
@@ -99,24 +99,17 @@ public class GameView extends GridPane {
         startView = new StartView();
         startPresenter = new StartPresenter(startView);
         this.achtergrond = new Image("/Background.jpg", true);
-        this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+//        this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
         HBox hbox = new HBox();
         rollButton = new Button("Roll");
         diceImage = new ImageView();
         random = new Random();
         scoreboardPanel = new VBox();
-        nameLabel = new Label[startPresenter.getPlayers().size()];
-        scoreLabel = new Label[startPresenter.getPlayers().size()];
-        avatarLabel = new ImageView[startPresenter.getPlayers().size()];
+        nameLabel = new Label[model.getPlayers().size()];
+        scoreLabel = new Label[model.getPlayers().size()];
+        avatarLabel = new ImageView[model.getPlayers().size()];
         model = new Spel();
-        for (int i = 0; i < startPresenter.getPlayers().size(); i++) {
-            nameLabel[i] = new Label("");
-            scoreLabel[i] = new Label("");
-            avatarLabel[i] = new ImageView();
-
-            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
-        }
     }
 
     public void layoutNodes() {
@@ -149,9 +142,18 @@ public class GameView extends GridPane {
         getChildren().add(diceImage);
         GridPane.setConstraints(rollButton, 12, 2);
         getChildren().add(rollButton);
-        GridPane.setConstraints(hbox, 6, 0);
-        getChildren().add(hbox);
-        getChildren().add(scoreboardPanel);
+
+        for (int i = 0; i < model.getPlayers().size(); i++) {
+            nameLabel[i] = new Label("");
+            scoreLabel[i] = new Label("");
+            avatarLabel[i] = new ImageView();
+
+            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
+        }
+        updateScoreboard(model.getPlayers());
+        this.setGridLinesVisible(true);
+        this.add(scoreboardPanel,1,1);
+        //getChildren().add(scoreboardPanel);
     }
 
     public HBox getHbox() {

@@ -35,7 +35,7 @@ public class GamePresenter {
         gameView.getRollButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-              gameView.roll(actionEvent);
+                gameView.roll(actionEvent);
             }
         });
         gameView.getChildren().forEach(item -> {
