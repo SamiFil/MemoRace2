@@ -41,11 +41,8 @@ public class MainMenuPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 StartView startView = new StartView();
-                try {
+
                     StartPresenter startPresenter = new StartPresenter(startView);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 mainMenuView.getScene().setRoot(startView);
 
             }

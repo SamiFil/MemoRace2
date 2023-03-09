@@ -17,7 +17,7 @@ public class Dice extends ImageView {
     Random random = new Random();
     Spel model;
     StartPresenter startPresenter;
-    GameView gameview = new GameView(startPresenter.getPlayers().size());
+    GameView gameview = new GameView(model);
 
 public void roll(ActionEvent actionEvent) {
 gameview.getRollButton().setDisable(true);

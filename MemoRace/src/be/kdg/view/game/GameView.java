@@ -4,6 +4,7 @@ import be.kdg.model.board.Dice;
 import be.kdg.model.board.Spel;
 import be.kdg.model.player.Player;
 import be.kdg.view.start.StartPresenter;
+import be.kdg.view.start.StartView;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -42,7 +43,7 @@ public class GameView extends GridPane {
     private Label[] scoreLabel;
     private ImageView[] avatarLabel;
     private StartPresenter startPresenter;
-    private int numPlayers;
+    private StartView startView;
 
 
     public Button getRollButton() {
@@ -53,11 +54,10 @@ public class GameView extends GridPane {
         return diceImage;
     }
 
-    public GameView(int numPlayers) {
+    public GameView(Spel model) {
         this.initialiseNodes();
         this.layoutNodes();
         updateScoreboard(startPresenter.getPlayers());
-        this.numPlayers = numPlayers;
 
     }
 
@@ -96,6 +96,8 @@ public class GameView extends GridPane {
     }
 
     public void initialiseNodes() {
+        startView = new StartView();
+        startPresenter = new StartPresenter(startView);
         this.achtergrond = new Image("/Background.jpg", true);
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
@@ -103,13 +105,12 @@ public class GameView extends GridPane {
         rollButton = new Button("Roll");
         diceImage = new ImageView();
         random = new Random();
-        JFXPanel jfxPanel = new JFXPanel();
         scoreboardPanel = new VBox();
-        nameLabel = new Label[numPlayers];
-        scoreLabel = new Label[numPlayers];
-        avatarLabel = new ImageView[numPlayers];
+        nameLabel = new Label[startPresenter.getPlayers().size()];
+        scoreLabel = new Label[startPresenter.getPlayers().size()];
+        avatarLabel = new ImageView[startPresenter.getPlayers().size()];
         model = new Spel();
-        for (int i = 0; i < numPlayers; i++) {
+        for (int i = 0; i < startPresenter.getPlayers().size(); i++) {
             nameLabel[i] = new Label("");
             scoreLabel[i] = new Label("");
             avatarLabel[i] = new ImageView();

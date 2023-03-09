@@ -44,10 +44,8 @@ public class StartPresenter {
     private final int   MAX_PLAYERS = 4;
     private ComboBox<Integer> numberOfPlayersComboBox;
 
-    public StartPresenter(StartView startView) throws IOException {
+    public StartPresenter(StartView startView) {
         this.startView = startView;
-        assert false;
-        this.model = new Spel();
         addEventHandlers();
 
     }
@@ -60,8 +58,6 @@ public class StartPresenter {
 
     private void addEventHandlers() {
         players = new ArrayList<Player>();
-
-
         startView.getAddPlayers().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -142,7 +138,8 @@ public class StartPresenter {
                         return;
                     }
                     else {
-                        GameView gameView = new GameView(players.size());
+                        Spel model = new Spel();
+                        GameView gameView = new GameView(model);
                         GamePresenter gamePresenter = new GamePresenter(model, gameView);
                         Stage gameStage = new Stage();
                         Scene gameScene = new Scene(gameView, 1920, 1080);
