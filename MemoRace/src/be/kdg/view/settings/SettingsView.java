@@ -86,17 +86,4 @@ public class SettingsView extends VBox {
         box2.setSpacing(10);
 
     }
-//    @Override
-//    public void start(Stage primaryStage) {
-//
-//
-//
-//        Scene scene = new Scene(root);
-//        primaryStage.setScene(scene);
-//        primaryStage.setHeight(467);
-//        primaryStage.setWidth(400);
-//        primaryStage.setTitle("Settings");
-//        primaryStage.show();
-//
-//    }
 }

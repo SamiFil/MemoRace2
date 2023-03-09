@@ -18,14 +18,12 @@ public class Spel {
     private Speelveld speelveld;
     private ArrayList<Integer> geradenKaarten;
     private int mouseclicks=0;
-    private ArrayList<Player> players;
     private StartPresenter startPresenter;
 
     public Spel() {
         this.spelBezig = true;
         this.speelveld = new Speelveld();
         this.geradenKaarten = new ArrayList<>();
-        this.players = new ArrayList<Player>();
     }
 
     public boolean paarGevonden() {
@@ -46,18 +44,7 @@ public class Spel {
         return spelBezig;
     }
 
-    public void addPlayer(String playerName, String selectedAvatar) {
-        if (players.size() < 4) {
-            int playerNumber = players.size() + 1;
-            String playerNaam = playerName + playerNumber;
-            Player player = new Player(playerName,selectedAvatar);
-            players.add(player);
-        }
-    }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
 
     public int getMouseclicks() {
         return mouseclicks;

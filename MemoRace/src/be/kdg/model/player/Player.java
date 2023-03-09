@@ -6,6 +6,7 @@ import be.kdg.view.start.StartPresenter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javax.swing.*;
 import java.util.Objects;
 
 /**
@@ -14,19 +15,20 @@ import java.util.Objects;
  */
 public class Player {
     private String naam;
-    private String avatar;
-    private int amountOfWonCards;
+    private ImageView avatar;
+    private int score;
     private boolean isBeurt;
     private boolean isGewonnen;
 
-    public Player(String naam, String avatar) {
+    public Player(String naam, ImageView avatar) {
         this.naam = naam;
         this.avatar = avatar;
+        score = 0;
         isBeurt = false;
         isGewonnen = false;
     }
 
-    public String getAvatar() {
+    public ImageView getAvatar() {
         return avatar;
     }
 
@@ -42,6 +44,19 @@ public class Player {
         isGewonnen = gewonnen;
     }
 
-
-
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
+
+    public void setAvatar(ImageView avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+}

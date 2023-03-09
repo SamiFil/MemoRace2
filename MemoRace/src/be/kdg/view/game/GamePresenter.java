@@ -1,6 +1,7 @@
 package be.kdg.view.game;
 
 import be.kdg.model.board.Spel;
+import be.kdg.model.player.Player;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+
 /**
  * Sami Filjak
  * 10/02/2023
@@ -19,6 +22,7 @@ import javafx.scene.layout.HBox;
 public class GamePresenter {
     private GameView gameView;
     private Spel model;
+
     private Boolean disableKeys = false;
 
     public GamePresenter(Spel model, GameView gameView) {
