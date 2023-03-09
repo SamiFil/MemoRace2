@@ -59,7 +59,7 @@ public class StartPresenter {
     }
 
     private void addEventHandlers() {
-
+        players = new ArrayList<Player>();
 
 
         startView.getAddPlayers().setOnAction(new EventHandler<ActionEvent>() {
@@ -98,13 +98,13 @@ public class StartPresenter {
                     HBox hBox = new HBox();
                     TextField textField = new TextField();
                     ComboBox<String> avatarComboBox = new ComboBox<>(FXCollections.observableList(avatarNames));
-                    avatarComboBox.getSelectionModel().selectedItemProperty().addListener(
-                            (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                            });
                     textField.setMaxWidth(150);
                     textField.setPromptText("Player " + (i + 1));
                     hBox.getChildren().addAll(textField, avatarComboBox);
                     startView.getChildren().add(hBox);
+                    avatarComboBox.getSelectionModel().selectedItemProperty().addListener(
+                            (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+                            });
                     textField.setOnAction(event -> {
                         String playerName = textField.getText();
                         ImageView selectedAvatar = new ImageView("avatars/" + avatarComboBox.getValue().toString() + ".jpg");
