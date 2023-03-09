@@ -42,6 +42,7 @@ public class GameView extends GridPane {
     private Label[] scoreLabel;
     private ImageView[] avatarLabel;
     private StartPresenter startPresenter;
+    private int numPlayers;
 
 
     public Button getRollButton() {
@@ -53,22 +54,10 @@ public class GameView extends GridPane {
     }
 
     public GameView(int numPlayers) {
-        this.model = model;
         this.initialiseNodes();
         this.layoutNodes();
-        scoreboardPanel = new VBox();
-        nameLabel = new Label[numPlayers];
-        scoreLabel = new Label[numPlayers];
-        avatarLabel = new ImageView[numPlayers];
-
-        for (int i = 0; i < numPlayers; i++) {
-            nameLabel[i] = new Label("");
-            scoreLabel[i] = new Label("");
-            avatarLabel[i] = new ImageView();
-
-            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
-        }
         updateScoreboard(startPresenter.getPlayers());
+        this.numPlayers = numPlayers;
 
     }
 
@@ -110,11 +99,23 @@ public class GameView extends GridPane {
         this.achtergrond = new Image("/Background.jpg", true);
         this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         kaartMap = new HashMap<>();
-        HBox hbox = new HBox(); // maak een HBox om alle VBoxes in te plaatsen
+        HBox hbox = new HBox();
         rollButton = new Button("Roll");
         diceImage = new ImageView();
         random = new Random();
         JFXPanel jfxPanel = new JFXPanel();
+        scoreboardPanel = new VBox();
+        nameLabel = new Label[numPlayers];
+        scoreLabel = new Label[numPlayers];
+        avatarLabel = new ImageView[numPlayers];
+        model = new Spel();
+        for (int i = 0; i < numPlayers; i++) {
+            nameLabel[i] = new Label("");
+            scoreLabel[i] = new Label("");
+            avatarLabel[i] = new ImageView();
+
+            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
+        }
     }
 
     public void layoutNodes() {
