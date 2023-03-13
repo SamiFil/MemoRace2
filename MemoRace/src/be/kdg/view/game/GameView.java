@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,33 +48,48 @@ public class GameView extends GridPane {
     private StartView startView;
 
 
-    public Button getRollButton() {
-        return rollButton;
-    }
-
-    public ImageView getDiceImage() {
-        return diceImage;
-    }
 
     public GameView(Spel model) {
         this.initialiseNodes();
+        updateScoreboard(model.getPlayers());
         this.layoutNodes();
         this.model = model;
-        updateScoreboard(model.getPlayers());
+    }
 
+    public void initialiseNodes() {
+        startView = new StartView();
+        startPresenter = new StartPresenter(startView);
+        this.achtergrond = new Image("/Background.jpg", true);
+        this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+        kaartMap = new HashMap<>();
+        HBox hbox = new HBox();
+        rollButton = new Button("Roll");
+        diceImage = new ImageView();
+        random = new Random();
+        scoreboardPanel = new VBox();
+
+        model = new Spel();
     }
 
     public void updateScoreboard(ArrayList<Player> players) {
+        nameLabel = new Label[players.size()];
+        scoreLabel = new Label[players.size()];
+        avatarLabel = new ImageView[players.size()];
         for (int i = 0; i < players.size(); i++) {
             nameLabel[i] = new Label("");
+            nameLabel[i].setFont(Font.font("Verdana", 20));
+            nameLabel[i].setTextFill(Paint.valueOf("#ffffff"));
             scoreLabel[i] = new Label("");
+            scoreLabel[i].setFont(Font.font("Verdana", 20));
+            scoreLabel[i].setTextFill(Paint.valueOf("#ffffff"));
             avatarLabel[i] = new ImageView();
-
+            avatarLabel[i].setFitHeight(100);
+            avatarLabel[i].setFitWidth(100);
             scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
         }
         for (int i = 0; i < players.size(); i++) {
             nameLabel[i].setText(players.get(i).getNaam());
-            scoreLabel[i].setText(Integer.toString(players.get(i).getScore()));
+            scoreLabel[i].setText("Geraden kaarten: " + Integer.toString(players.get(i).getScore()));
             Image avatarImage = players.get(i).getAvatar().getImage();
             ImageView avatarView = new ImageView(avatarImage);
             avatarView.setFitHeight(30);
@@ -102,22 +119,7 @@ public class GameView extends GridPane {
         thread.start();
     }
 
-    public void initialiseNodes() {
-        startView = new StartView();
-        startPresenter = new StartPresenter(startView);
-        this.achtergrond = new Image("/Background.jpg", true);
-//        this.setBackground(new Background(new BackgroundImage(achtergrond, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
-        kaartMap = new HashMap<>();
-        HBox hbox = new HBox();
-        rollButton = new Button("Roll");
-        diceImage = new ImageView();
-        random = new Random();
-        scoreboardPanel = new VBox();
-        nameLabel = new Label[model.getPlayers().size()];
-        scoreLabel = new Label[model.getPlayers().size()];
-        avatarLabel = new ImageView[model.getPlayers().size()];
-        model = new Spel();
-    }
+
 
     public void layoutNodes() {
         setMaxWidth(Double.MAX_VALUE);
@@ -150,9 +152,8 @@ public class GameView extends GridPane {
         GridPane.setConstraints(rollButton, 12, 2);
         getChildren().add(rollButton);
         updateScoreboard(model.getPlayers());
-        this.setGridLinesVisible(true);
-        this.add(scoreboardPanel,1,1);
-        //getChildren().add(scoreboardPanel);
+//        this.setGridLinesVisible(true);
+        this.add(scoreboardPanel,16,1);
     }
 
     public HBox getHbox() {
@@ -162,4 +163,13 @@ public class GameView extends GridPane {
     public HashMap<ImageView, Integer> getKaartMap() {
         return kaartMap;
     }
+
+    public Button getRollButton() {
+        return rollButton;
+    }
+
+    public ImageView getDiceImage() {
+        return diceImage;
+    }
+
 }
