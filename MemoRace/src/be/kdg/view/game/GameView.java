@@ -64,6 +64,13 @@ public class GameView extends GridPane {
 
     public void updateScoreboard(ArrayList<Player> players) {
         for (int i = 0; i < players.size(); i++) {
+            nameLabel[i] = new Label("");
+            scoreLabel[i] = new Label("");
+            avatarLabel[i] = new ImageView();
+
+            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
+        }
+        for (int i = 0; i < players.size(); i++) {
             nameLabel[i].setText(players.get(i).getNaam());
             scoreLabel[i].setText(Integer.toString(players.get(i).getScore()));
             Image avatarImage = players.get(i).getAvatar().getImage();
@@ -142,14 +149,6 @@ public class GameView extends GridPane {
         getChildren().add(diceImage);
         GridPane.setConstraints(rollButton, 12, 2);
         getChildren().add(rollButton);
-
-        for (int i = 0; i < model.getPlayers().size(); i++) {
-            nameLabel[i] = new Label("");
-            scoreLabel[i] = new Label("");
-            avatarLabel[i] = new ImageView();
-
-            scoreboardPanel.getChildren().addAll(nameLabel[i], scoreLabel[i], avatarLabel[i]);
-        }
         updateScoreboard(model.getPlayers());
         this.setGridLinesVisible(true);
         this.add(scoreboardPanel,1,1);

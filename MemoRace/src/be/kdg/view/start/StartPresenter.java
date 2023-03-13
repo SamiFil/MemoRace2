@@ -1,6 +1,4 @@
 package be.kdg.view.start;
-
-import be.kdg.model.board.Card;
 import be.kdg.model.board.Speelveld;
 import be.kdg.model.board.Spel;
 import be.kdg.model.player.Player;
@@ -10,7 +8,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -19,10 +16,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +29,6 @@ public class StartPresenter {
     private TextField textField;
     private Player player;
     Spel model = new Spel();
-    private int counter = 0;
     private Speelveld speelVeld;
     ComboBox<String> avatarComboBox;
     List<String> avatarNames = Arrays.asList("Michael", "Kobe", "Stephen", "Lebron");
