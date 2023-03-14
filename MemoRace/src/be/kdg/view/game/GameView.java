@@ -32,9 +32,10 @@ import java.util.Random;
  * 10/02/2023
  */
 public class GameView extends GridPane {
-    private Spel model = new Spel();
+    private Spel model;
     private Image achtergrond;
     private HashMap<ImageView, Integer> kaartMap;
+    GameView gameView;
     int rij = 0;
     int kolom = 0;
     private HBox hbox;
@@ -48,14 +49,15 @@ public class GameView extends GridPane {
     private StartPresenter startPresenter;
     private StartView startView;
     private GameTimer gametimer;
+    private Label currentPlayerLabel;
 
 
 
     public GameView(Spel model) {
+        this.model = model;
         this.initialiseNodes();
         updateScoreboard(model.getPlayers());
         this.layoutNodes();
-        this.model = model;
     }
 
     public void initialiseNodes() {
@@ -72,6 +74,7 @@ public class GameView extends GridPane {
         gametimer = new GameTimer();
         model = new Spel();
         gametimer.start();
+        currentPlayerLabel = new Label();
     }
 
     public void updateScoreboard(ArrayList<Player> players) {
@@ -100,7 +103,9 @@ public class GameView extends GridPane {
             avatarLabel[i].setImage(avatarImage);
         }
     }
-
+    public void setCurrentPlayerLabel(String playerName) {
+        currentPlayerLabel.setText("Current Player: " + playerName);
+    }
     public void roll(ActionEvent actionEvent) {
         rollButton.setDisable(true);
         Thread thread = new Thread() {
@@ -155,8 +160,9 @@ public class GameView extends GridPane {
         getChildren().add(rollButton);
         updateScoreboard(model.getPlayers());
         this.setGridLinesVisible(true);
-        this.add(scoreboardPanel,16,1);
+//        this.add(scoreboardPanel,16,1);
         this.add(gametimer.getTimerTekst(), 16,3);
+        this.add(currentPlayerLabel, 16,1);
     }
 
     public HBox getHbox() {
@@ -175,4 +181,7 @@ public class GameView extends GridPane {
         return diceImage;
     }
 
+    public Spel getModel() {
+        return model;
+    }
 }

@@ -45,6 +45,9 @@ public class GamePresenter {
                             } else {
                                 model.setKeuze2(gameView.getKaartMap().get(currentImage) + 1);
                                 if (!model.paarGevonden()) {
+                                    model.switchPlayer();
+                                    gameView.setCurrentPlayerLabel(model.getCurrentPlayer().getNaam());
+                                    gameView.updateScoreboard(model.getPlayers());
                                     gameView.setDisable(true);
                                     disableKeys = true;
                                     long startTime = System.currentTimeMillis();

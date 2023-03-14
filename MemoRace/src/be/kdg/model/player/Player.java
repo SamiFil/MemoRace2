@@ -23,7 +23,7 @@ public class Player {
     public Player(String naam, ImageView avatar) {
         this.naam = naam;
         this.avatar = avatar;
-        score = 0;
+        this.score = 0;
         isBeurt = false;
         isGewonnen = false;
     }

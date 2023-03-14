@@ -35,12 +35,11 @@ public class StartPresenter {
     private final int   MAX_PLAYERS = 4;
     private ComboBox<Integer> numberOfPlayersComboBox;
 
+
     public StartPresenter(StartView startView) {
         this.startView = startView;
         addEventHandlers();
     }
-
-
 
 
     private void addEventHandlers() {
@@ -128,6 +127,7 @@ public class StartPresenter {
                         GamePresenter gamePresenter = new GamePresenter(model, gameView);
                         Stage gameStage = new Stage();
                         Scene gameScene = new Scene(gameView, 1920, 1080);
+//                        Scene gameScene = new Scene(gameView, 800, 600);
                         gameStage.setScene(gameScene);
                         gameStage.setFullScreen(true);
                         gameView.getScene().getWindow().sizeToScene();
