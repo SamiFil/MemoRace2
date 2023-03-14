@@ -1,6 +1,7 @@
 package be.kdg.view.game;
 
 import be.kdg.model.board.Spel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ public class GamePresenter {
     }
 
     public void addEventHandlers() {
+        gameView.updateScoreboard(model.getPlayers());
         gameView.getRollButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -46,8 +48,9 @@ public class GamePresenter {
                                 model.setKeuze2(gameView.getKaartMap().get(currentImage) + 1);
                                 if (!model.paarGevonden()) {
                                     model.switchPlayer();
-                                    gameView.setCurrentPlayerLabel(model.getCurrentPlayer().getNaam());
-                                    gameView.updateScoreboard(model.getPlayers());
+                                    Platform.runLater(() -> {
+                                        gameView.setCurrentPlayerLabel(model.getCurrentPlayer().getNaam());
+                                    });
                                     gameView.setDisable(true);
                                     disableKeys = true;
                                     long startTime = System.currentTimeMillis();
@@ -67,6 +70,10 @@ public class GamePresenter {
                                 } else {
                                     gameView.setDisable(true);
                                     disableKeys = true;
+                                    Platform.runLater(() -> {
+                                                model.getCurrentPlayer().setScore(model.getCurrentPlayer().getScore() + 1);
+                                    gameView.updateScoreboard(model.getPlayers());
+                                    });
                                     gameView.setDisable(false);
                                     disableKeys = false;
                                 }

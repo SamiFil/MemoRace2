@@ -34,7 +34,6 @@ public class Spel {
             speelveld.getKaarten().get(keuze1 - 1).setIsGevondenToTrue();
             geradenKaarten.add(keuze1);
             geradenKaarten.add(keuze2);
-            getCurrentPlayer().setScore(getCurrentPlayer().getScore()+1);
             return true;
         }
         else {

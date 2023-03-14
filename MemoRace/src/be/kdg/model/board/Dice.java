@@ -14,8 +14,7 @@ import java.util.Random;
  * 8/03/2023
  */
 public class Dice extends ImageView {
-    Spel model;
-    StartPresenter startPresenter;
+
 
 
 

@@ -78,6 +78,8 @@ public class GameView extends GridPane {
     }
 
     public void updateScoreboard(ArrayList<Player> players) {
+        if(!scoreboardPanel.getChildren().isEmpty()){
+        scoreboardPanel.getChildren().clear();}
         nameLabel = new Label[players.size()];
         scoreLabel = new Label[players.size()];
         avatarLabel = new ImageView[players.size()];
@@ -105,6 +107,8 @@ public class GameView extends GridPane {
     }
     public void setCurrentPlayerLabel(String playerName) {
         currentPlayerLabel.setText("Current Player: " + playerName);
+        currentPlayerLabel.setFont(Font.font("Verdana", 20));
+        currentPlayerLabel.setTextFill(Paint.valueOf("#ffffff"));
     }
     public void roll(ActionEvent actionEvent) {
         rollButton.setDisable(true);
@@ -159,10 +163,10 @@ public class GameView extends GridPane {
         GridPane.setConstraints(rollButton, 12, 2);
         getChildren().add(rollButton);
         updateScoreboard(model.getPlayers());
-        this.setGridLinesVisible(true);
-//        this.add(scoreboardPanel,16,1);
+//        this.setGridLinesVisible(true);
+        this.add(scoreboardPanel,16,1);
         this.add(gametimer.getTimerTekst(), 16,3);
-        this.add(currentPlayerLabel, 16,1);
+        this.add(currentPlayerLabel, 16,2);
     }
 
     public HBox getHbox() {
