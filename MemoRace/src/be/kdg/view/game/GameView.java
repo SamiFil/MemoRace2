@@ -1,6 +1,7 @@
 package be.kdg.view.game;
 
 import be.kdg.model.board.Dice;
+import be.kdg.model.board.GameTimer;
 import be.kdg.model.board.Spel;
 import be.kdg.model.player.Player;
 import be.kdg.view.start.StartPresenter;
@@ -46,6 +47,7 @@ public class GameView extends GridPane {
     private ImageView[] avatarLabel;
     private StartPresenter startPresenter;
     private StartView startView;
+    private GameTimer gametimer;
 
 
 
@@ -67,8 +69,9 @@ public class GameView extends GridPane {
         diceImage = new ImageView();
         random = new Random();
         scoreboardPanel = new VBox();
-
+        gametimer = new GameTimer();
         model = new Spel();
+        gametimer.start();
     }
 
     public void updateScoreboard(ArrayList<Player> players) {
@@ -96,7 +99,6 @@ public class GameView extends GridPane {
             avatarView.setFitWidth(30);
             avatarLabel[i].setImage(avatarImage);
         }
-
     }
 
     public void roll(ActionEvent actionEvent) {
@@ -152,8 +154,9 @@ public class GameView extends GridPane {
         GridPane.setConstraints(rollButton, 12, 2);
         getChildren().add(rollButton);
         updateScoreboard(model.getPlayers());
-//        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(true);
         this.add(scoreboardPanel,16,1);
+        this.add(gametimer.getTimerTekst(), 16,3);
     }
 
     public HBox getHbox() {

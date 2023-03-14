@@ -1,19 +1,11 @@
 package be.kdg.view.game;
 
 import be.kdg.model.board.Spel;
-import be.kdg.model.player.Player;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-
-import java.util.ArrayList;
 
 /**
  * Sami Filjak
